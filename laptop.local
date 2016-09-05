@@ -1,0 +1,18 @@
+#!/bin/sh
+\curl -sSL https://get.rvm.io | bash
+
+# intall mysql
+brew install mysql
+ln -sfv /usr/local/opt/mysql/*plist ~/Library/LaunchAgents
+launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
+
+# install elasticsearch
+brew install elasticsearch
+launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.elasticsearch.plist
+launchctl load ~/Library/LaunchAgents/homebrew.mxcl.elasticsearch.plist
+
+# install tmux clipboard wrapper
+brew install reattach-to-user-namespace
+
+# install graphviz for railsroady
+brew install graphviz
