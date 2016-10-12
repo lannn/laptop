@@ -126,17 +126,25 @@ brew "qt"
 # Programming languages
 brew "libyaml" # should come after openssl
 brew "node"
-brew "rbenv"
+# brew "rbenv"
 brew "ruby-build"
 
 # Databases
 brew "postgres", restart_service: true
+brew "mysql", restart_service: true
 brew "redis", restart_service: true
+brew "elasticsearch", restart_service: true
+
+# Rvm
+curl -L https://get.rvm.io | bash -s stable --auto-dotfiles --autolibs=enable --rails
+
+# Oh-my-zsh
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 EOF
 
 fancy_echo "Configuring Ruby ..."
 find_latest_ruby() {
-  rbenv install -l | grep -v - | tail -1 | sed -e 's/^ *//'
+  rvm install -l | grep -v - | tail -1 | sed -e 's/^ *//'
 }
 
 ruby_version="$(find_latest_ruby)"
